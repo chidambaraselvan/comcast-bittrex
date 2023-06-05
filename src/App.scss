@@ -1,0 +1,68 @@
+.App {
+  padding: 20px 35px;
+  background-color: floralwhite;
+
+  .App-header {
+    min-height: 20vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    color: #282c34;
+  }
+
+  .App-link {
+    color: #61dafb;
+  }
+  
+  .App-Body {
+    color: #282c34;
+  }
+
+  .pagination-bar{
+    justify-content: center;
+  }
+  
+  .card {
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 25px auto;
+    padding: 25px;
+    background-color: cornsilk;
+
+    .card-header{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .last-updated{
+        position: absolute;
+        top:10px;
+        right:10px;
+        margin: 0;
+        color: #B3B3B3;
+        
+        svg {
+          vertical-align: top;
+          padding-right: 5px;
+          color: #000000;
+        }
+      }
+    }
+
+    .card-body{
+      display: flex;
+      flex-wrap: wrap;
+
+      p {
+        flex: 0 0 50%;
+
+        .change{
+          vertical-align: bottom;
+          color: red;
+        }
+      }
+    }
+  }
+}
