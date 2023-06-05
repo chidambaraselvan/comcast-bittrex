@@ -5,11 +5,11 @@ import HttpClient from './ApiHelper.jsx';
 import MarketCard from "./components/marketCard/marketCard.jsx";
 import Pagination from './components/pagination/pagination.jsx';
 
-let PageSize = 10;
 function App() {
   const [summaries, setSummaries] = useState([]);
   const [currencies, setCurrencies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(10);
 
   useEffect(() => {
     Promise.all([getCurrencies(), getSummary()])
@@ -40,8 +40,8 @@ function App() {
   }
 
   const currentMarketData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return summaries.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, summaries]);
 
@@ -70,7 +70,7 @@ function App() {
           className="pagination-bar"
           currentPage={currentPage}
           totalCount={summaries.length}
-          pageSize={PageSize}
+          pageSize={pageSize}
           onPageChange={page => setCurrentPage(page)}
         />
         {
@@ -85,7 +85,7 @@ function App() {
         className="pagination-bar"
         currentPage={currentPage}
         totalCount={summaries.length}
-        pageSize={PageSize}
+        pageSize={pageSize}
         onPageChange={page => setCurrentPage(page)}
       />
       <footer>

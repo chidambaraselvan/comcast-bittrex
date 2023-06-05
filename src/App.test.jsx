@@ -1,4 +1,5 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 import axios from 'axios';
 
@@ -56,9 +57,21 @@ describe('App renders', () => {
     });
   })
 
-  test('renders learn react link', async () => {
+  test('renders App with search and pagination', async () => {
+
+    jest
+      .spyOn(React, 'useState')
+      .mockImplementationOnce(() => [summaries, () => null])
+      .mockImplementationOnce(() => [currencies, () => null])
+      .mockImplementation((x) => [x, () => null]);
+
     render(<App />);
-    await Promise.resolve();
-    await waitFor(() => expect(screen.getByText(/Market Summary/i)).toBeInTheDocument())
+    expect(screen.getByText(/Market Summary/i)).toBeInTheDocument();
+
+    const inputElement = screen.getByPlaceholderText(/Search here/i);
+    fireEvent.change(inputElement, { target: { value: 'test' } })
+    fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter', charCode: 13 });
+    fireEvent.keyDown(inputElement, { key: 'A', code: 'KeyA' });
+    fireEvent.input(inputElement);
   })
 })
